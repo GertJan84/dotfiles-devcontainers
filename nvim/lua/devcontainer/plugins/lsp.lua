@@ -3,13 +3,21 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp", 
+        "hrsh7th/cmp-nvim-lsp",
+        "williamboman/mason-tool-installer.nvim",
         "j-hui/fidget.nvim",
     },
     config = function()
         require("fidget").setup({})
 
         require("mason").setup()
+        require("mason-tool-installer").setup({
+            ensure_installed = {
+                "tree-sitter-cli"
+            },
+            run_on_start = true,
+
+        })
 
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
